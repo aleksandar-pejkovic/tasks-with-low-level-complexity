@@ -22,11 +22,7 @@ import dev.task.low_level.repository.ItemRepository;
 public class ItemController {
 
     @Autowired
-    private final ItemRepository itemRepository;
-
-    public ItemController(ItemRepository itemRepository) {
-        this.itemRepository = itemRepository;
-    }
+    private ItemRepository itemRepository;
 
     @PostMapping
     public Item createItem(@RequestBody Item item) {

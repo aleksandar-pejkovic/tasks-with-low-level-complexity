@@ -3,7 +3,6 @@ package dev.task.low_level.controller;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -13,23 +12,25 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import dev.task.low_level.model.Item;
 import dev.task.low_level.repository.ItemRepository;
 
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = {ItemController.class})
 class ItemControllerTest {
 
+    @Autowired
     private ItemController itemController;
 
+    @MockBean
     private ItemRepository itemRepository;
-
-    @BeforeEach
-    public void setUp() {
-        itemRepository = mock(ItemRepository.class);
-        itemController = new ItemController(itemRepository);
-    }
 
     @Test
     public void testCreateItem() {
